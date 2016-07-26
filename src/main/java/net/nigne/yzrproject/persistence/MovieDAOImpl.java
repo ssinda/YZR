@@ -309,14 +309,20 @@ public class MovieDAOImpl implements MovieDAO {
 	@Override
 	public List<MovieVO> basicMovie() {
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<MovieVO> cq = cb.createQuery(MovieVO.class);
-		Root<MovieVO> root = cq.from(MovieVO.class);
-		cq.where(cb.equal(root.get("status"), "play"));
-		cq.orderBy(cb.desc(root.get("open_date")));
+		try{
+			CriteriaQuery<MovieVO> cq = cb.createQuery(MovieVO.class);
+			Root<MovieVO> root = cq.from(MovieVO.class);
+			cq.where(cb.equal(root.get("status"), "play"));
+			cq.orderBy(cb.desc(root.get("open_date")));
+			
+			TypedQuery<MovieVO> tq = entityManager.createQuery(cq).setFirstResult(0).setMaxResults(3);
+			List<MovieVO> basic_movie = tq.getResultList();
+			return basic_movie;
+			
+		}catch(Exception e){
+			return null;
+		}
 		
-		TypedQuery<MovieVO> tq = entityManager.createQuery(cq).setFirstResult(0).setMaxResults(3);
-		List<MovieVO> basic_movie = tq.getResultList();
-		return basic_movie;
 	}
 
 	@Override

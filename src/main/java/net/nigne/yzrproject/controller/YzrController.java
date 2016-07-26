@@ -91,15 +91,22 @@ public class YzrController {
 		if(member_id == "" || member_id == null){
 			// 기본추천영화
 			List<MovieVO> rec_basic = movie_service.basicMovie();
-			
 			List<String> basic_title = new ArrayList();
 			
-			basic_title.add("No.1");
-			basic_title.add("No.2");
-			basic_title.add("No.3");
-			
-			model.addAttribute("basic_title", basic_title);
-			model.addAttribute("rec_basic", rec_basic);
+			if(!rec_basic.isEmpty()){
+				basic_title.add("No.1");
+				basic_title.add("No.2");
+				basic_title.add("No.3");
+				
+				model.addAttribute("basic_title", basic_title);
+				model.addAttribute("rec_basic", rec_basic);
+			}else{
+				basic_title.add("등록된 영화가 없습니다.");
+				basic_title.add("등록된 영화가 없습니다.");
+				basic_title.add("등록된 영화가 없습니다.");
+				
+				model.addAttribute("basic_title", basic_title);
+			}
 		}else{
 			List<ReservationVO> list = reservation_service.getReservation_list(member_id);	// 예매내역
 			

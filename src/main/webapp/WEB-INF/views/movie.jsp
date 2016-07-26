@@ -141,28 +141,49 @@
 		}else if(category == "schedule"){
 			menu.hide();
 			document.getElementById("checkbox").checked = false;
-			result += '<h3 style="margin-left:18px;">'+ movie[0].open_date +'</h3>'
+			result += '<h3 style="margin-left:18px; margin-bottom:10px;">'+ movie[0].open_date +'</h3>'
 			for(var j=0; j<movie.length; j++){
 				if(j>0){
 					if(movie[j].open_date != movie[j-1].open_date){
-						result += '<br/> <div style="border:1px solid #000; margin-top:430px;"></div>'
+						result += '<br/> <div style="border:1px solid #000; margin-top:420px; clear:both;"></div>'
 							+ '<h3 style="margin-left:18px;">'+ movie[j].open_date +'</h3>'
+							+ '<div id="chart" style="width:285px; height:380px; text-align:left; float:left;">'
+							+ '<div style="margin-left:18px;">'
+							+ '<img src="/resources/poster/'+movie[j].poster+'" style="width:249px; height:300px;"/> <br/>'
+							+ '제목 : '+ movie[j].title +' <br/>'
+							+ '관람등급 : '+ movie[j].rating +' <br/>'
+							+ '예매율 : '+ movie[j].reservation_rate +'% <br/>'
+							+ '개봉날짜 : '+ movie[j].open_date +' <br/>'
+							+ '<input type="button" id="res_btn" name="res_btn" class="btn btn-danger btn-sm" onclick="" value="예매" style="width:250px; display:inline-block; margin-top:7px;"/>'
+							+ '</div>'
+							+ '</div>'
+							+ '</div>';
 					}
+					if(movie[j].open_date == movie[j-1].open_date){
+						result += '<div id="chart" style="width:285px; height:380px; text-align:left; float:left; margin-bottom:70px;">'
+							+ '<div style="margin-left:18px;">'
+							+ '<img src="/resources/poster/'+movie[j].poster+'" style="width:249px; height:300px;"/> <br/>'
+							+ '제목 : '+ movie[j].title +' <br/>'
+							+ '관람등급 : '+ movie[j].rating +' <br/>'
+							+ '예매율 : '+ movie[j].reservation_rate +'% <br/>'
+							+ '개봉날짜 : '+ movie[j].open_date +' <br/>'
+							+ '<input type="button" id="res_btn" name="res_btn" class="btn btn-danger btn-sm" onclick="" value="예매" style="width:250px; display:inline-block; margin-top:7px;"/>'
+							+ '</div>'
+							+ '</div>';
+					}
+				}else{
+					result += '<div id="chart" style="width:285px; height:380px; text-align:left; float:left;">'
+						+ '<div style="margin-left:18px;">'
+						+ '<img src="/resources/poster/'+movie[j].poster+'" style="width:249px; height:300px;"/> <br/>'
+						+ '제목 : '+ movie[j].title +' <br/>'
+						+ '관람등급 : '+ movie[j].rating +' <br/>'
+						+ '예매율 : '+ movie[j].reservation_rate +'% <br/>'
+						+ '개봉날짜 : '+ movie[j].open_date +' <br/>'
+						+ '<input type="button" id="res_btn" name="res_btn" class="btn btn-danger btn-sm" onclick="" value="예매" style="width:250px; display:inline-block; margin-top:7px;"/>'
+						+ '</div>'
+						+ '</div>';
 				}
-				result += '<div id="movie_chart" style="margin-top:20px;">'
-					+ '<div id="chart" style="width:285px; height:380px; text-align:left; float:left;">'
-					+ '<div style="margin-left:18px;">'
-					+ '<img src="/resources/poster/'+movie[j].poster+'" style="width:249px; height:300px;"/> <br/>'
-					+ '제목 : '+ movie[j].title +' <br/>'
-					+ '관람등급 : '+ movie[j].rating +' <br/>'
-					+ '예매율 : '+ movie[j].reservation_rate +'% <br/>'
-					+ '개봉날짜 : '+ movie[j].open_date +' <br/>'
-					+ '<input type="button" id="res_btn" name="res_btn" class="btn btn-danger btn-sm" onclick="" value="예매" style="width:250px; display:inline-block; margin-top:7px;"/>'
-					+ '</div>'
-					+ '</div>'
-					+ '</div>';
 			}
-			
 		}
 		document.getElementById("ajax_movie").innerHTML = result;
 	}

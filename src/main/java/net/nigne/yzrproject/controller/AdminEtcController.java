@@ -43,7 +43,7 @@ public class AdminEtcController {
 			@RequestParam("actor_age") String actor_age, @RequestParam("actor_debut") String actor_debut, @RequestParam("actor_company") String actor_company) throws Exception{
 		
 		String fileName = actor_name + ".jpg";
-		File target = new File(uploadPath + "\\actor", fileName);
+		File target = new File("../resources/actor" , fileName);
 		FileCopyUtils.copy(file.getBytes(), target);
 		
 		ActorVO vo=new ActorVO();
